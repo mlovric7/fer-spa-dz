@@ -50,19 +50,22 @@ const emitDelete = () => {
 }
 
 input[type="checkbox"] {
-  margin-right: 10px;
+  margin-right: 20px;
+  width: 1.5em;
+  height: 1.5em;
 }
+
 
 button {
   margin-left: auto;
   padding: 2px 6px;
   border: none;
   border-radius: 3px;
+  font-size: 0.6em;
   background-color: #ff6b6b;
   color: white;
   cursor: pointer;
 }
-
 button:hover {
   background-color: #ff5252;
 }

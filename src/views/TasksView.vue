@@ -60,6 +60,7 @@ onMounted(async () => {
 }
 
 .new-task-input {
+  font-size: 0.8em;
   width: 100%;
   padding: 10px;
   margin-bottom: 20px;
