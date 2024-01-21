@@ -1,5 +1,8 @@
 <template>
   <div class="tasks-view">
+    <div class="completion-rate">
+      Postotak dovršenih zadataka: {{ completionRate }}%
+    </div>
     <input
       type="text"
       v-model="newTaskText"
@@ -23,7 +26,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useTodoStore } from '@/stores/todo.js'
 import TaskItem from '@/components/TaskItem.vue'
 import { storeToRefs } from 'pinia'
@@ -31,6 +34,13 @@ import { storeToRefs } from 'pinia'
 const todoStore = useTodoStore();
 let { tasks } = storeToRefs(todoStore)
 const newTaskText = ref('');
+
+const totalTasks = computed(() => tasks.value.length)
+const finishedTasks = computed(() => tasks.value.filter(todo => todo.completed).length)
+const completionRate = computed(() => {
+  if (totalTasks.value === 0) return 100;
+  return Math.round((finishedTasks.value / totalTasks.value) * 100);
+});
 
 const addTask = () => {
   if (newTaskText.value.trim()) {
@@ -69,5 +79,11 @@ onMounted(async () => {
 
 .tasks-list {
   margin-top: 20px;
+}
+
+.completion-rate {
+  margin-bottom: 10px;
+  font-size: 1em;
+  font-weight: bold;
 }
 </style>
